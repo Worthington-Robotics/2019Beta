@@ -12,6 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.loops.Looper;
+import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.RobotStateEstimator;
+
+import java.util.Arrays;
 
 
 /**
@@ -23,6 +28,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Robot extends TimedRobot {
   public static OI m_oi;
+  private final SubsystemManager mSubsystemManager = new SubsystemManager(Arrays.asList(
+          RobotStateEstimator.getInstance(),
+          Drive.getInstance()
+  ));
+  private Looper mEnabledLooper = new Looper();
+  private Looper mDisabledLooper = new Looper();
 
   SendableChooser<Command> m_chooser = new SendableChooser<>();
 
@@ -32,6 +43,9 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
+    mSubsystemManager.registerEnabledLoops(mEnabledLooper);
+    mSubsystemManager.registerDisabledLoops(mDisabledLooper);
+    mDisabledLooper.start();
     m_oi = new OI();
     SmartDashboard.putData("Auto mode", m_chooser);
   }
@@ -97,6 +111,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    mDisabledLooper.stop();
+    mEnabledLooper.start();
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

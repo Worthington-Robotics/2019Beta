@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
 import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
@@ -72,7 +73,8 @@ public class Drive extends Subsystem {
                             operatorInput = HIDHelper.getAdjStick(Constants.MASTER_STICK);
 
                         else operatorInput = new double[]{0, 0, 0};
-                        setOpenLoop(arcadeDrive(operatorInput[0], operatorInput[2]));
+                        SmartDashboard.putNumberArray("stick", operatorInput);
+                        setOpenLoop(arcadeDrive(operatorInput[1], operatorInput[2]));
                         break;
 
                     default:
@@ -255,6 +257,7 @@ public class Drive extends Subsystem {
         if (mDriveControlState != DriveControlState.OPEN_LOOP) {
             System.out.println("Switching to open loop");
             configTele();
+            System.out.println(signal);
             mDriveControlState = DriveControlState.OPEN_LOOP;
         }
         periodicIO.left_demand = signal.getLeft();

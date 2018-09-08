@@ -42,7 +42,7 @@ public class Constants {
     public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
     public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
 
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(new Joystick(0), 0.05, 0.0, 0.8, 0.5, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(new Joystick(0), 0.05, 1.0, 1.0, 1.0, 2);
     public static final HIDHelper.HIDConstants MARKS_STICK = new HIDHelper.HIDConstants(new Joystick(1), 0.05, 0.0, 0.8, 0.5, 2);
 
 }
