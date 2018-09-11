@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 
@@ -7,20 +8,22 @@ public class Lift extends Subsystem {
     //The one instance of Lift
     private static Lift m_LiftInstance = new Lift();
     private double[] operatorInput = {0, 0, 0};
+    private WPI_TalonSRX liftLower;
+    private WPI_TalonSRX liftUpper;
     private final Loop mLoop = new Loop() {
         public void onStart(double timestamp) {
-
         }
 
         public void onLoop(double timestamp) {
         }
 
         public void onStop(double timestamp) {
+
         }
     };
     public Lift()
     {
-        lift
+
     }
     public void writeToLog() {
     }
