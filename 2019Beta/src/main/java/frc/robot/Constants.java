@@ -11,6 +11,8 @@ public class Constants {
     public static final int DRIVE_FRONT_RIGHT_ID = 4;
     public static final int DRIVE_MIDDLE_RIGHT_ID = 5;
     public static final int DRIVE_BACK_RIGHT_ID = 6;
+    public static final int LIFT_LOWER_ID = 7;
+    public static final int LIFT_UPPER_ID = 8;
     //Stuff that isn't mine
     //Update times / rates
     public static double LOOPER_DT = 0.01; //dt in seconds
@@ -43,7 +45,7 @@ public class Constants {
     public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
 
     public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(new Joystick(0), 0.05, 1.0, 1.0, 1.0, 2);
-    public static final HIDHelper.HIDConstants MARKS_STICK = new HIDHelper.HIDConstants(new Joystick(1), 0.05, 0.0, 0.8, 0.5, 2);
+    public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(new Joystick(1), 0.05, 1.0, 1.0, 1.0, 2);
 
 }
 
