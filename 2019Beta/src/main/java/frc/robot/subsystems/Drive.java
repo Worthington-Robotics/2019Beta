@@ -95,12 +95,12 @@ public class Drive extends Subsystem {
         mMotionPlanner = new DriveMotionPlanner();
         reset();
         mCSVWriter = new ReflectingCSVWriter<PeriodicIO>("", PeriodicIO.class);
-            driveFrontLeft = new WPI_TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
-          driveMiddleLeft = new WPI_TalonSRX(Constants.DRIVE_MIDDLE_LEFT_ID);
-              driveBackLeft = new WPI_TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
-          driveFrontRight = new WPI_TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
+        driveFrontLeft = new WPI_TalonSRX(Constants.DRIVE_FRONT_LEFT_ID);
+        driveMiddleLeft = new WPI_TalonSRX(Constants.DRIVE_MIDDLE_LEFT_ID);
+        driveBackLeft = new WPI_TalonSRX(Constants.DRIVE_BACK_LEFT_ID);
+        driveFrontRight = new WPI_TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
         driveMiddleRight = new WPI_TalonSRX(Constants.DRIVE_MIDDLE_RIGHT_ID);
-            driveBackRight = new WPI_TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        driveBackRight = new WPI_TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
     }
 
     public static Drive getInstance() {
@@ -247,7 +247,7 @@ public class Drive extends Subsystem {
                 rightMotorOutput = xSpeed - zRotation;
             }
         }
-    return new DriveSignal(rightMotorOutput, leftMotorOutput);
+        return new DriveSignal(rightMotorOutput, leftMotorOutput);
     }
 
     /**
@@ -370,7 +370,7 @@ public class Drive extends Subsystem {
             //       periodicIO.left_feedforward + Constants.kDriveLowGearVelocityKd * periodicIO.left_accel / 1023.0);
             //mRightMaster.set(ControlMode.Velocity, periodicIO.angular_demand, DemandType.ArbitraryFeedForward,
             //       periodicIO.right_feedforward + Constants.kDriveLowGearVelocityKd * periodicIO.right_accel / 1023.0);*/
-            }
+        }
     }
 
 

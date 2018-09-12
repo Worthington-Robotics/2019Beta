@@ -2,7 +2,7 @@ package frc.lib.util;
 
 import edu.wpi.first.wpilibj.Joystick;
 
-public class HIDHelper {
+public class HIDHelper{
 
     /**
      *
@@ -36,14 +36,17 @@ public class HIDHelper {
 
     public static double getAxisMapped(double input, double min_output, double max_output){
         return (input - -1) * (max_output - min_output) / (1 - -1) + max_output;
+
+
     }
+        public static Joystick getJoystick(HIDConstants hid){return hid.joystick;}
+
 
     public static class HIDConstants{
 
         private Joystick joystick;
         private double deadBand, scalarCutX, scalarCutY, scalarCutZ;
         private int polyFunct;
-
         public HIDConstants(Joystick joystick, double deadBand, double scalarCutX, double scalarCutY, double scalarCutZ, int polyFunct){
             this.joystick = joystick;
             this.deadBand =  deadBand;
@@ -52,6 +55,7 @@ public class HIDHelper {
             this.scalarCutZ = scalarCutZ;
             this.polyFunct = polyFunct;
         }
+        public static Joystick getJoystick(HIDConstants hid){return hid.joystick;}
     }
 
 }
