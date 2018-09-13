@@ -13,6 +13,7 @@ public class Lift extends Subsystem {
     //The one instance of Lift
     private static Lift m_LiftInstance = new Lift();
     private double[] operatorInput = {0, 0, 0};
+    private boolean trigger = false;
     private WPI_TalonSRX liftLower;
     private WPI_TalonSRX liftUpper;
     private final Loop mLoop = new Loop() {
@@ -20,35 +21,44 @@ public class Lift extends Subsystem {
         }
 
         public void onLoop(double timestamp) {
-            setOperatorInput(HIDHelper.getAdjStick(SECOND_STICK));
-            if(SECOND.getTrigger()) liftUpper.set(operatorInput[1]);
 
-            liftLower.set(1);
         }
 
         public void onStop(double timestamp) {
-        liftLower.set(0);
-        liftUpper.set(0);
+            liftLower.set(0);
+            liftUpper.set(0);
         }
     };
-    public Lift()
-    {
-    liftLower = new WPI_TalonSRX(LIFT_LOWER_ID);
-    liftUpper = new WPI_TalonSRX(LIFT_UPPER_ID);
+
+    public Lift() {
+        reset();
+        liftLower = new WPI_TalonSRX(LIFT_LOWER_ID);
+        liftUpper = new WPI_TalonSRX(LIFT_UPPER_ID);
     }
+
     public void writeToLog() {
     }
+
     public void setOperatorInput(double[] input) {
-        operatorInput = HIDHelper.getAdjStick(SECOND_STICK);
+        operatorInput = input;
     }
 
     // Optional design pattern for caching periodic reads to avoid hammering the HAL/CAN.
     public void readPeriodicInputs() {
+        setOperatorInput(HIDHelper.getAdjStick(SECOND_STICK));
+        trigger = SECOND.getTrigger();
     }
 
     // Optional design pattern for caching periodic writes to avoid hammering the HAL/CAN.
     public void writePeriodicOutputs() {
+
+        if (trigger) {
+            liftUpper.set(operatorInput[1]);
+        } else {
+            liftLower.set(operatorInput[1]);
+        }
     }
+
 
     public void outputTelemetry() {
 
