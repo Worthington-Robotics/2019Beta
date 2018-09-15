@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="252ce1d5-ecdb-41ee-9c0c-67425a2efa99" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/ActionGroup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/StateMachene.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/StateMacheneDiscriptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -90,13 +87,13 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="gradle" value="7" />
-          <entry key="java" value="7816" />
+          <entry key="java" value="8025" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="7" />
-          <entry key="JAVA" value="7816" />
+          <entry key="JAVA" value="8025" />
         </counts>
       </usages-collector>
     </session>
@@ -141,11 +138,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+            <state relative-caret-position="86">
+              <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -241,7 +238,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/lib/statemachine/StateMachene.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="493">
@@ -719,13 +716,13 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Forks.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/Acitons.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/Action.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/ActionGroup.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/StateMacheneDiscriptor.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/statemachine/StateMachene.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java" />
       </list>
     </option>
   </component>
@@ -736,8 +733,7 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-288" />
-    <option name="y" value="-1088" />
+    <option name="x" value="-622" />
     <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
@@ -832,7 +828,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537040860967" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1537041660413" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -944,10 +940,9 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-288" y="-1088" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2675906" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.3797277" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -956,7 +951,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286334" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3275488" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.49508196" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1118,16 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/lib/statemachine/Action.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -1198,6 +1183,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="33" column="25" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Lift.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="67" column="51" lean-forward="true" selection-start-line="67" selection-start-column="51" selection-end-line="67" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
