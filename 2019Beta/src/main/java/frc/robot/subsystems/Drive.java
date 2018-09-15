@@ -3,8 +3,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.DemandType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
@@ -45,6 +47,7 @@ public class Drive extends Subsystem {
     private WPI_TalonSRX driveMiddleRight;
     private WPI_TalonSRX driveBackRight;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
+    private AHRS Ahrs;
     private final Loop mLoop = new Loop() {
 
         @Override
@@ -102,9 +105,11 @@ public class Drive extends Subsystem {
         driveFrontRight = new WPI_TalonSRX(Constants.DRIVE_FRONT_RIGHT_ID);
         driveMiddleRight = new WPI_TalonSRX(Constants.DRIVE_MIDDLE_RIGHT_ID);
         driveBackRight = new WPI_TalonSRX(Constants.DRIVE_BACK_RIGHT_ID);
+        Ahrs = new AHRS(SPI.Port.kMXP);
         trans = new DoubleSolenoid(Constants.TRANS_LOW_ID, Constants.TRANS_HIGH_ID);
 
     }
+
 
     public static Drive getInstance() {
         return m_DriveInstance;
@@ -183,6 +188,7 @@ public class Drive extends Subsystem {
         mOverrideTrajectory = false;
         mMotionPlanner.reset();
         periodic = new PeriodicIO();
+        Ahrs.reset();
         //TODO add reset with sensor impl
 
     }
@@ -324,11 +330,11 @@ public class Drive extends Subsystem {
         double prevLeftTicks = periodic.left_pos_ticks;
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.B2 = Constants.MASTER.getRawButton(2);
-        periodic.left_pos_ticks = 0; //TODO Add data source replacing zero
-        periodic.right_pos_ticks = 0; //TODO Add data source replacing zero
-        periodic.left_velocity_ticks_per_100ms = 0; //TODO Add data source replacing zero
-        periodic.right_velocity_ticks_per_100ms = 0; //TODO Add data source replacing zero
-        periodic.gyro_heading = Rotation2d.fromDegrees(0).rotateBy(mGyroOffset); //TODO Add data source replacing zero
+        periodic.left_pos_ticks = -driveFrontLeft.getSelectedSensorPosition(0);
+        periodic.right_pos_ticks = driveFrontRight.getSelectedSensorPosition(0);
+        periodic.left_velocity_ticks_per_100ms = -driveFrontLeft.getSelectedSensorVelocity(0);
+        periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity(0);
+        periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw() + 360) % 360).rotateBy(mGyroOffset);
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
         if (deltaLeftTicks > 0.0) {
