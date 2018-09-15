@@ -70,8 +70,11 @@ public class Pose2d implements IPose2d<Pose2d> {
      * Logical inverse of the above.
      */
     public static Twist2d log(final Pose2d transform) {
+        //heading assigned to pose
         final double dtheta = transform.getRotation().getRadians();
+        //half of heading
         final double half_dtheta = 0.5 * dtheta;
+
         final double cos_minus_one = transform.getRotation().cos() - 1.0;
         double halftheta_by_tan_of_halfdtheta;
         if (Math.abs(cos_minus_one) < kEps) {

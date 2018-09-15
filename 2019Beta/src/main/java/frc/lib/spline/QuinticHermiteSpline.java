@@ -10,7 +10,7 @@ public class QuinticHermiteSpline extends Spline {
     private static final double kEpsilon = 1e-5;
     private static final double kStepSize = 1.0;
     private static final double kMinDelta = 0.001;
-    private static final int kSamples = 100;
+    private static final int kSamples = 100; //used for a riemann sum based integration
     private static final int kMaxIterations = 100;
 
     private double x0, x1, dx0, dx1, ddx0, ddx1, y0, y1, dy0, dy1, ddy0, ddy1;
@@ -62,6 +62,8 @@ public class QuinticHermiteSpline extends Spline {
 
     /**
      * Re-arranges the spline into an at^5 + bt^4 + ... + f form for simpler computations
+     * is a form of matrix multiplication of hermite interpolation
+     * https://en.wikipedia.org/wiki/Hermite_interpolation
      */
     private void computeCoefficients() {
         ax = -6 * x0 - 3 * dx0 - 0.5 * ddx0 + 0.5 * ddx1 - 3 * dx1 + 6 * x1;
@@ -99,16 +101,19 @@ public class QuinticHermiteSpline extends Spline {
      */
     @Override
     public Translation2d getPoint(double t) {
+        //at^5+bt^4+ct^3+dt^2+et+f -- equation for a 5th order polynomial from the generated constants
         double x = ax * t * t * t * t * t + bx * t * t * t * t + cx * t * t * t + dx * t * t + ex * t + fx;
         double y = ay * t * t * t * t * t + by * t * t * t * t + cy * t * t * t + dy * t * t + ey * t + fy;
         return new Translation2d(x, y);
     }
 
     private double dx(double t) {
+        //derivative of the 5th order function x
         return 5 * ax * t * t * t * t + 4 * bx * t * t * t + 3 * cx * t * t + 2 * dx * t + ex;
     }
 
     private double dy(double t) {
+        //derivative of the 5th order function y
         return 5 * ay * t * t * t * t + 4 * by * t * t * t + 3 * cy * t * t + 2 * dy * t + ey;
     }
 

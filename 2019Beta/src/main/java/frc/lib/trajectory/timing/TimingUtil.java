@@ -43,6 +43,7 @@ public class TimingUtil {
         // there is no admissible end velocity or acceleration, we set the end velocity to the state's maximum allowed
         // velocity and will repair the acceleration during the backward pass (by slowing down the predecessor).
         ConstrainedState<S> predecessor = new ConstrainedState<>();
+        //parameterize the beginning state
         predecessor.state = states.get(0);
         predecessor.distance = 0.0;
         predecessor.max_velocity = start_velocity;
@@ -192,17 +193,18 @@ public class TimingUtil {
 
         // Integrate the constrained states forward in time to obtain the TimedStates.
         List<TimedState<S>> timed_states = new ArrayList<>(states.size());
-        double t = 0.0;
-        double s = 0.0;
-        double v = 0.0;
+        double t = 0.0; //time
+        double s = 0.0; //distance
+        double v = 0.0; //velocity
         for (int i = 0; i < states.size(); ++i) {
             final ConstrainedState<S> constrained_state = constraint_states.get(i);
-            // Advance t.
-            final double ds = constrained_state.distance - s;
+            // Advance t by creating dt from velocity or acceleration
+            final double ds = constrained_state.distance - s; //change in distance
             final double accel = (constrained_state.max_velocity * constrained_state.max_velocity - v * v) / (2.0 * ds);
             double dt = 0.0;
             if (i > 0) {
                 timed_states.get(i - 1).set_acceleration(reverse ? -accel : accel);
+                //discover dt from acceleration or velocity
                 if (Math.abs(accel) > kEpsilon) {
                     dt = (constrained_state.max_velocity - v) / accel;
                 } else if (Math.abs(v) > kEpsilon) {
@@ -211,11 +213,12 @@ public class TimingUtil {
                     throw new RuntimeException();
                 }
             }
+            //add dt to time
             t += dt;
             if (Double.isNaN(t) || Double.isInfinite(t)) {
-                throw new RuntimeException();
+                throw new RuntimeException("Bad dt evaluation during trajectory time parameterization");
             }
-
+            //set the velocity and distance
             v = constrained_state.max_velocity;
             s = constrained_state.distance;
             timed_states.add(new TimedState<>(constrained_state.state, t, reverse ? -v : v, reverse ? -accel : accel));
