@@ -39,7 +39,6 @@ public class HIDHelper{
 
 
     }
-        public static Joystick getJoystick(HIDConstants hid){return hid.joystick;}
 
 
     public static class HIDConstants{

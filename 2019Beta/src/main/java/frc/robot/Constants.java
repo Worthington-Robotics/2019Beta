@@ -13,6 +13,8 @@ public class Constants {
     public static final int DRIVE_BACK_RIGHT_ID = 6;
     public static final int LIFT_LOWER_ID = 7;
     public static final int LIFT_UPPER_ID = 8;
+    public static final int LOWER_LIFT_ENCODER_A = 5;
+    public static final int LOWER_LIFT_ENCODER_B = 6;
     //Stuff that isn't mine
     //Update times / rates
     public static double LOOPER_DT = 0.01; //dt in seconds

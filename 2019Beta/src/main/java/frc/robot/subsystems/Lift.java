@@ -1,14 +1,12 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
 import frc.lib.util.HIDHelper;
 import frc.robot.Constants;
-import frc.robot.SubsystemManager;
-
-import static frc.robot.Constants.*;
 
 public class Lift extends Subsystem {
     //The one instance of Lift
@@ -17,7 +15,7 @@ public class Lift extends Subsystem {
     private PeriodicIO periodic;
     private WPI_TalonSRX liftLower;
     private WPI_TalonSRX liftUpper;
-    public static Lift mLIftInstance = new Lift();
+    private Encoder lowerLift;
     private final Loop mLoop = new Loop() {
         public void onStart(double timestamp) {
 
@@ -35,10 +33,14 @@ public class Lift extends Subsystem {
 
     public Lift() {
         reset();
-        liftLower = new WPI_TalonSRX(LIFT_LOWER_ID);
-        liftUpper = new WPI_TalonSRX(LIFT_UPPER_ID);
+        liftLower = new WPI_TalonSRX(Constants.LIFT_LOWER_ID);
+        liftUpper = new WPI_TalonSRX(Constants.LIFT_UPPER_ID);
+        lowerLift = new Encoder(Constants.LOWER_LIFT_ENCODER_A, Constants.LOWER_LIFT_ENCODER_B);
     }
-    public static Lift getInstance(){return mLIftInstance;}
+
+    public static Lift getInstance() {
+        return m_LiftInstance;
+    }
 
     public void writeToLog() {
     }
@@ -49,14 +51,15 @@ public class Lift extends Subsystem {
 
     // Optional design pattern for caching periodic reads to avoid hammering the HAL/CAN.
     public void readPeriodicInputs() {
-        setOperatorInput(HIDHelper.getAdjStick(SECOND_STICK));
-        PeriodicIO.trigger = SECOND.getTrigger();
+        setOperatorInput(HIDHelper.getAdjStick(Constants.SECOND_STICK));
+        periodic.trigger = Constants.SECOND.getTrigger();
+        periodic.liftEncoder = lowerLift.get();
     }
 
     // Optional design pattern for caching periodic writes to avoid hammering the HAL/CAN.
     public void writePeriodicOutputs() {
 
-        if (PeriodicIO.trigger) {
+        if (periodic.trigger) {
             liftUpper.set(operatorInput[1]);
         } else {
             liftLower.set(operatorInput[1]);
@@ -65,13 +68,16 @@ public class Lift extends Subsystem {
 
 
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("LiftEncoder" , periodic.liftEncoder);
     }
 
     public void stop() {
     }
 
     public void reset() {
+        periodic = new PeriodicIO();
+        lowerLift.reset();
+
     }
 
     public void registerEnabledLoops(ILooper enabledLooper) {
@@ -80,7 +86,8 @@ public class Lift extends Subsystem {
 
     public static class PeriodicIO {
         //INPUTS
-        public static boolean trigger = false;
+        public boolean trigger = false;
+        public int liftEncoder = 0;
         //OUTPUTS
 
     }
