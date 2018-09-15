@@ -32,7 +32,7 @@ public class Lift extends Subsystem {
     };
 
     public Lift() {
-        reset();
+        periodic = new PeriodicIO();
         liftLower = new WPI_TalonSRX(Constants.LIFT_LOWER_ID);
         liftUpper = new WPI_TalonSRX(Constants.LIFT_UPPER_ID);
         lowerLift = new Encoder(Constants.LOWER_LIFT_ENCODER_A, Constants.LOWER_LIFT_ENCODER_B);
@@ -60,15 +60,18 @@ public class Lift extends Subsystem {
     public void writePeriodicOutputs() {
 
         if (periodic.trigger) {
-            liftUpper.set(operatorInput[1]);
+            liftUpper.set(-1.5*operatorInput[1]);
+            liftLower.set(operatorInput[1]);
         } else {
             liftLower.set(operatorInput[1]);
+            liftUpper.set(0);
         }
     }
 
 
     public void outputTelemetry() {
         SmartDashboard.putNumber("LiftEncoder" , periodic.liftEncoder);
+        SmartDashboard.putNumberArray("LiftUpper" , operatorInput);
     }
 
     public void stop() {
