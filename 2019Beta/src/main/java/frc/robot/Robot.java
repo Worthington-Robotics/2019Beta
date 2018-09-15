@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
 import frc.robot.subsystems.Drive;
+import frc.robot.subsystems.Lift;
 import frc.robot.subsystems.RobotStateEstimator;
 
 import java.util.Arrays;
@@ -30,7 +31,8 @@ public class Robot extends TimedRobot {
   public static OI m_oi;
   private final SubsystemManager mSubsystemManager = new SubsystemManager(Arrays.asList(
           RobotStateEstimator.getInstance(),
-          Drive.getInstance()
+          Drive.getInstance(),
+          Lift.getInstance()
   ));
   private Looper mEnabledLooper = new Looper();
   private Looper mDisabledLooper = new Looper();
