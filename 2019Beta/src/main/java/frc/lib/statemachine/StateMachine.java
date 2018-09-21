@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class StateMachene {
+public class StateMachine {
 
     private volatile static int state = -1;
     private volatile static ConcurrentLinkedQueue<ActionGroup> qedStates;
@@ -29,7 +29,7 @@ public class StateMachene {
         }
     };
 
-    public static void runMan(StateMacheneDiscriptor Dis) {
+    public static void runMan(StateMachineDescriptor Dis) {
         qedStates = Dis.getStates();
         Thread thread = new Thread(Man);
         thread.start();

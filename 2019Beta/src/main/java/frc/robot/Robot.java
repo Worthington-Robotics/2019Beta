@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.Action;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Forks;
 import frc.robot.subsystems.Lift;
@@ -39,8 +40,6 @@ public class Robot extends TimedRobot {
     private Looper mEnabledLooper = new Looper();
     private Looper mDisabledLooper = new Looper();
 
-    SendableChooser<Command> m_chooser = new SendableChooser<>();
-
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -51,7 +50,6 @@ public class Robot extends TimedRobot {
         mSubsystemManager.registerDisabledLoops(mDisabledLooper);
         mDisabledLooper.start();
         m_oi = new OI();
-        SmartDashboard.putData("Auto mode", m_chooser);
     }
 
     /**
@@ -76,7 +74,6 @@ public class Robot extends TimedRobot {
     public void disabledInit() {
         mEnabledLooper.stop();
         mDisabledLooper.start();
-
     }
 
     @Override

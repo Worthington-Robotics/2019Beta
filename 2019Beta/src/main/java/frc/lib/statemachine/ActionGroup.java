@@ -36,7 +36,7 @@ public class ActionGroup {
         if (t_Start + t_Timeout <= Timer.getFPGATimestamp()) return true;
         boolean temp = true;
         for (Action action : group) {
-            temp &= action.isFinsihed();
+            temp &= action.isFinished();
         }
         return temp;
     }

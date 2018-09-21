@@ -12,7 +12,6 @@ import frc.robot.Constants;
 public class Forks extends Subsystem {
     //The one instance of Lift
     private static Forks m_ForksInstance = new Forks();
-    private double[] operatorInput = {0, 0, 0};
     private PeriodicIO periodic;
     private Spark rightShooter;
     private Spark leftShooter;
@@ -23,7 +22,25 @@ public class Forks extends Subsystem {
         }
 
         public void onLoop(double timestamp) {
+            if (periodic.B2) {
+                setShotPower(-1);
+            } else if (periodic.B3) {
+                setShotPower(1);
+            } else if (periodic.B4) {
+                setShotPower(0.5);
+            } else if (periodic.B5) {
+                setShotPower(-0.5);
+            } else {
+                setShotPower(0.0);
+            }
+            if (periodic.B8) {
+                setUDPower(1.0);
+            } else if(periodic.B9) {
+                setUDPower(-1.0);
+            } else {
+                setUDPower(0.0);
 
+            }
         }
 
         public void onStop(double timestamp) {
@@ -47,9 +64,12 @@ public class Forks extends Subsystem {
     public void writeToLog() {
     }
 
+    public void setShotPower(double power){
+        periodic.shotPower = power;
+    }
 
-    public void setOperatorInput(double[] input) {
-        operatorInput = input;
+    public void setUDPower(double power){
+        periodic.udPower = power;
     }
 
     // Optional design pattern for caching periodic reads to avoid hammering the HAL/CAN.
@@ -60,35 +80,14 @@ public class Forks extends Subsystem {
         periodic.B5 = Constants.SECOND.getRawButton(5);
         periodic.B8 = Constants.SECOND.getRawButton(8);
         periodic.B9 = Constants.SECOND.getRawButton(9);
+
     }
 
     // Optional design pattern for caching periodic writes to avoid hammering the HAL/CAN.
     public void writePeriodicOutputs() {
-        if (periodic.B2) {
-            leftShooter.set(-1);
-            rightShooter.set(1);
-
-        } else if (periodic.B3) {
-            leftShooter.set(1);
-            rightShooter.set(-1);
-        } else if (periodic.B4) {
-            leftShooter.set(.5);
-            rightShooter.set(-.5);
-        } else if (periodic.B5) {
-            leftShooter.set(-.5);
-            rightShooter.set(.5);
-        } else {
-            leftShooter.set(0);
-            rightShooter.set(0);
-        }
-        if (periodic.B8) {
-            forkUD.set(1);
-        } else if(periodic.B9) {
-            forkUD.set(-1);
-        } else {
-            forkUD.set(0);
-
-        }
+        leftShooter.set(periodic.shotPower);
+        rightShooter.set(-periodic.shotPower);
+        forkUD.set(periodic.udPower);
     }
 
 
@@ -118,6 +117,8 @@ public class Forks extends Subsystem {
         public boolean B8 = false;
         public boolean B9 = false;
         public int liftEncoder = 0;
+        public double shotPower = 0.0;
+        public double udPower = 0.0;
         //OUTPUTS
 
     }
