@@ -2,10 +2,10 @@ package frc.lib.statemachine;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class StateMacheneDiscriptor {
+public class StateMachineDescriptor {
     private ConcurrentLinkedQueue<ActionGroup> Qedstates;
 
-    public StateMacheneDiscriptor() {
+    public StateMachineDescriptor() {
         Qedstates = new ConcurrentLinkedQueue<>();
     }
 

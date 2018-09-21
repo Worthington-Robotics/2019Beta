@@ -91,9 +91,9 @@ public class Robot extends TimedRobot {
      * LabVIEW Dashboard, remove all of the chooser code and uncomment the
      * getString code to get the auto name from the text box below the Gyro
      *
-     * <p>You can add additional auto modes by adding additional commands to the
+     * <p>You can add additional auto modes by adding additional actions to the
      * chooser code above (like the commented example) or additional comparisons
-     * to the switch structure below with additional strings & commands.
+     * to the switch structure below with additional strings & actions.
      */
     @Override
     public void autonomousInit() {

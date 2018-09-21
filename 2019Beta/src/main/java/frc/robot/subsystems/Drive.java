@@ -148,6 +148,27 @@ public class Drive extends Subsystem {
         periodic.gyro_heading = heading;
     }
 
+    public double[] OneStickDrive() {
+        double[] demands = new double[2];
+        int left = 0;
+        int right = 0;
+        if (periodic.B6) {
+            left += .5;
+        }
+        if (periodic.B7) {
+            left -= .5;
+        }
+        if (periodic.B10) {
+            right -= .5;
+        }
+        if (periodic.B11) {
+            right += .5;
+        }
+        demands[0] = left;
+        demands[1] = right;
+        return demands;
+    }
+
     public double getLeftEncoderRotations() {
         return periodic.left_pos_ticks / Constants.DRIVE_ENCODER_PPR;
     }
@@ -335,6 +356,11 @@ public class Drive extends Subsystem {
         periodic.left_velocity_ticks_per_100ms = -driveFrontLeft.getSelectedSensorVelocity(0);
         periodic.right_velocity_ticks_per_100ms = driveFrontRight.getSelectedSensorVelocity(0);
         periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw() + 360) % 360).rotateBy(mGyroOffset);
+        periodic.one_stick_drive = SmartDashboard.getBoolean("DB/Button 1", false);
+        periodic.B6 = Constants.SECOND.getRawButton(6);
+        periodic.B7 = Constants.SECOND.getRawButton(7);
+        periodic.B10 = Constants.SECOND.getRawButton(10);
+        periodic.B11 = Constants.SECOND.getRawButton(11);
 
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
         if (deltaLeftTicks > 0.0) {
@@ -360,12 +386,21 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        if (mDriveControlState == DriveControlState.OPEN_LOOP) {
+        if (mDriveControlState == DriveControlState.OPEN_LOOP && !periodic.one_stick_drive) {
             //TODO write open loop outputs
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand, DemandType.ArbitraryFeedForward, 0.0);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand, DemandType.ArbitraryFeedForward, 0.0);
+            driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
+            driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
+        } else if (mDriveControlState == DriveControlState.OPEN_LOOP && periodic.one_stick_drive) {
+            double[] demands;
+            demands = OneStickDrive();
+            driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand, DemandType.ArbitraryFeedForward, demands[0]);
+            driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
+            driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
+            driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand, DemandType.ArbitraryFeedForward, demands[1]);
             driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
         } else {
@@ -386,6 +421,8 @@ public class Drive extends Subsystem {
         } else {
             trans.set(DoubleSolenoid.Value.kReverse);
         }
+        SmartDashboard.putNumber("Right", driveFrontRight.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Left", driveFrontLeft.getSensorCollection().getQuadraturePosition());
 
     }
 
@@ -435,6 +472,11 @@ public class Drive extends Subsystem {
         public Rotation2d gyro_heading = Rotation2d.identity();
         public Pose2d error = Pose2d.identity();
         public boolean B2 = false;
+        public boolean B6 = false;
+        public boolean B7 = false;
+        public boolean B10 = false;
+        public boolean B11 = false;
+        public boolean one_stick_drive = false;
 
         // OUTPUTS
         public double left_demand;

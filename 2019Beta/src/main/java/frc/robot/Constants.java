@@ -23,6 +23,7 @@ public class Constants {
 
     //Numerical Constants
     public static final int High_Shot = 1;
+    public static final double ONE_STICK_DRIVE = .5;
     //Stuff that isn't mine
     //Update times / rates
     public static double LOOPER_DT = 0.01; //dt in seconds
