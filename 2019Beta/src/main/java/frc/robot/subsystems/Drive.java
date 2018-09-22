@@ -224,7 +224,7 @@ public class Drive extends Subsystem {
             periodic.path_setpoint = mMotionPlanner.setpoint();
 
             if (!mOverrideTrajectory) {
-                setVelocity(new DriveSignal(inchesPerSecondToRpm(output.linear_velocity), Math.toDegrees(output.angular_position)));
+                setVelocity(new DriveSignal(inchesPerSecondToRpm(output.left_velocity), inchesPerSecondToRpm(output.right_velocity)));
                 //TODO will require additional math to convert from heading to steering angle
 
             } else {
