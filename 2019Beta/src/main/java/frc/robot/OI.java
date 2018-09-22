@@ -30,6 +30,7 @@ public class OI {
         second4.whileHeld(Action.toCommand(new Manipulate(Manipulate.ShotPower.Drop)));
         second5.whileHeld(Action.toCommand(new Manipulate(Manipulate.ShotPower.SlowUp)));
         second8.whileHeld(Action.toCommand(new ForkUD(true)));
+        second9.whileHeld(Action.toCommand(new ForkUD(false)));
     }
   //// CREATING BUTTONS
   // One type of button is a joystick button which is any button on a

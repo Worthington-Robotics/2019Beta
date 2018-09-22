@@ -4,6 +4,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import frc.lib.util.HIDHelper;
 
 public class Constants {
+    public static final int ONE = 1;
+    public static final int TWO = 2;
+    public static final int THREE = 3;
+    public static final int FOUR = 4;
+    public static final int FIVE = 5;
+    public static final int SIX= 6;
+    public static final int SEVEN = 7;
+    public static final int EIGHT = 8;
+    public static final int NINE = 9;
+    public static final int TEN = 10;
     //Motors and Controllers
     public static final int DRIVE_FRONT_LEFT_ID = 1;
     public static final int DRIVE_MIDDLE_LEFT_ID = 2;
@@ -13,6 +23,15 @@ public class Constants {
     public static final int DRIVE_BACK_RIGHT_ID = 6;
     public static final int LIFT_LOWER_ID = 7;
     public static final int LIFT_UPPER_ID = 8;
+    public static final double RKP = 0.085;
+    public static final double RKI = 0;
+    public static final double RKD = .175;
+    public static final double RKF = 0.0824;
+    public static final double LKP = 0.085;
+    public static final double LKI = 0;
+    public static final double LKD = .175;
+    public static final double LKF = 0.0824;
+
     //
     public static final int FORKSUD_ID = 4;
     public static final int RIGHT_SHOOTER_ID = 3;
@@ -31,7 +50,10 @@ public class Constants {
     public static final double PICKUP_POWER = -.75;
     public static final double SLOWUP_POWER = -.65;
     public static final double STOP_POWER = 0;
-    public static final double ONE_STICK_DRIVE = .5;
+    public static final double ROTATIONS_TO_INCHES = .3857421875;
+    public static final double TICKS_TO_INCHES = 1580;
+
+
     //Stuff that isn't mine
     //Update times / rates
     public static double LOOPER_DT = 0.01; //dt in seconds

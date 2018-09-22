@@ -8,11 +8,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.lib.geometry.Pose2d;
 import frc.lib.loops.Looper;
+import frc.lib.statemachine.StateMachine;
+import frc.robot.autoactiongroups.CrossTheLine;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Forks;
 import frc.robot.subsystems.Lift;
@@ -52,6 +56,7 @@ public class Robot extends TimedRobot {
         mDisabledLooper.start();
         m_oi = new OI();
         SmartDashboard.putData("Auto mode", m_chooser);
+        Drive.getInstance().reset();
     }
 
     /**
@@ -65,6 +70,7 @@ public class Robot extends TimedRobot {
     @Override
     public void robotPeriodic() {
         mSubsystemManager.outputTelemetry();
+        RobotState.getInstance().outputTelemetry();
     }
 
     /**
@@ -100,6 +106,9 @@ public class Robot extends TimedRobot {
 
         mDisabledLooper.stop();
         mEnabledLooper.start();
+        Drive.getInstance().reset();
+        RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
+        StateMachine.runMan(new CrossTheLine());
 
     }
 
@@ -115,6 +124,8 @@ public class Robot extends TimedRobot {
     public void teleopInit() {
         mDisabledLooper.stop();
         mEnabledLooper.start();
+        Drive.getInstance().reset();
+        RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
 
     }
 
@@ -126,6 +137,13 @@ public class Robot extends TimedRobot {
         Scheduler.getInstance().run();
     }
 
+    public void testInit()
+    {
+        mDisabledLooper.stop();
+        mEnabledLooper.start();
+        Drive.getInstance().reset();
+        RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
+    }
     /**
      * This function is called periodically during test mode.
      */

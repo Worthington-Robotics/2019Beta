@@ -29,7 +29,7 @@ public class Forks extends Subsystem {
         }
     };
 
-    public Forks() {
+    private Forks() {
         periodic = new PeriodicIO();
         leftShooter = new Spark(Constants.LEFT_SHOOTER_ID);
         rightShooter = new Spark(Constants.RIGHT_SHOOTER_ID);

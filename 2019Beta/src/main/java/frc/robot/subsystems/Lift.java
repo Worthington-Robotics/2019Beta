@@ -32,7 +32,7 @@ public class Lift extends Subsystem {
         }
     };
 
-    public Lift() {
+    private Lift() {
         periodic = new PeriodicIO();
         liftLower = new WPI_TalonSRX(Constants.LIFT_LOWER_ID);
         liftUpper = new WPI_TalonSRX(Constants.LIFT_UPPER_ID);

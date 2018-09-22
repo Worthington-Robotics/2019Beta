@@ -65,7 +65,7 @@ public class RobotStateEstimator extends Subsystem {
             final double leftDistance = drive_.getLeftEncoderDistance();
             final double rightDistance = drive_.getRightEncoderDistance();
             final double deltaLeft = leftDistance - left_encoder_prev_distance;
-            final double deltaRight = leftDistance - right_encoder_prev_distance;
+            final double deltaRight = rightDistance - right_encoder_prev_distance;
             final Rotation2d gyro_angle = drive_.getHeading();
             final Twist2d odometry_velocity = robot_state_.generateOdometryFromSensors(deltaLeft, deltaRight, gyro_angle);
             final Twist2d predicted_velocity = Kinematics.forwardKinematics(drive_.getLeftLinearVelocity(),  drive_.getRightLinearVelocity());
