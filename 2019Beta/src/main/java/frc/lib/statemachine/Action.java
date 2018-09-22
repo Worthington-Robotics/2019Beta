@@ -3,10 +3,13 @@ package frc.lib.statemachine;
 import edu.wpi.first.wpilibj.command.Command;
 
 public abstract class Action {
-    abstract void onStart();
-    abstract void onLoop();
-    abstract boolean isFinsihed();
-    abstract void onStop();
+    public abstract void onStart();
+
+    public abstract void onLoop();
+
+    public abstract boolean isFinished();
+
+    public abstract void onStop();
 
     /**
      * converts an action to a wpilib command for buttons
@@ -23,7 +26,7 @@ public abstract class Action {
             }
 
             protected boolean isFinished() {
-                return action.isFinsihed();
+                return action.isFinished();
             }
 
             protected void end(){

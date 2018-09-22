@@ -14,18 +14,14 @@ import frc.lib.geometry.Pose2dWithCurvature;
 import frc.lib.geometry.Rotation2d;
 import frc.lib.loops.ILooper;
 import frc.lib.loops.Loop;
-import frc.lib.trajectory.Trajectory;
 import frc.lib.trajectory.TrajectoryIterator;
 import frc.lib.trajectory.timing.TimedState;
-import frc.lib.trajectory.timing.TimingConstraint;
 import frc.lib.util.DriveSignal;
 import frc.lib.util.HIDHelper;
 import frc.lib.util.ReflectingCSVWriter;
 import frc.robot.Constants;
 import frc.robot.RobotState;
 import frc.robot.planners.DriveMotionPlanner;
-
-import java.util.List;
 
 public class Drive extends Subsystem {
 
@@ -324,27 +320,6 @@ public class Drive extends Subsystem {
         return mMotionPlanner.isDone() || mOverrideTrajectory;
     }
 
-    public Trajectory<TimedState<Pose2dWithCurvature>> generateTrajectory(
-            boolean reversed,
-            final List<Pose2d> waypoints,
-            final List<TimingConstraint<Pose2dWithCurvature>> constraints,
-            double max_vel,  // inches/s
-            double max_accel,  // inches/s^2
-            double max_voltage) {
-        return mMotionPlanner.generateTrajectory(reversed, waypoints, constraints, max_vel, max_accel, max_voltage);
-    }
-
-    public Trajectory<TimedState<Pose2dWithCurvature>> generateTrajectory(
-            boolean reversed,
-            final List<Pose2d> waypoints,
-            final List<TimingConstraint<Pose2dWithCurvature>> constraints,
-            double start_vel,
-            double end_vel,
-            double max_vel,  // inches/s
-            double max_accel,  // inches/s^2
-            double max_voltage) {
-        return mMotionPlanner.generateTrajectory(reversed, waypoints, constraints, start_vel, end_vel, max_vel, max_accel, max_voltage);
-    }
 
     @Override
     public synchronized void readPeriodicInputs() {
@@ -421,14 +396,13 @@ public class Drive extends Subsystem {
         } else {
             trans.set(DoubleSolenoid.Value.kReverse);
         }
-        SmartDashboard.putNumber("Right", driveFrontRight.getSensorCollection().getQuadraturePosition());
-        SmartDashboard.putNumber("Left", driveFrontLeft.getSensorCollection().getQuadraturePosition());
 
     }
 
 
     public void outputTelemetry() {
-
+        SmartDashboard.putNumber("Right", driveFrontRight.getSensorCollection().getQuadraturePosition());
+        SmartDashboard.putNumber("Left", driveFrontLeft.getSensorCollection().getQuadraturePosition());
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.write();

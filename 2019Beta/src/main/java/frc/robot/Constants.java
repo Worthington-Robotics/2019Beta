@@ -13,16 +13,24 @@ public class Constants {
     public static final int DRIVE_BACK_RIGHT_ID = 6;
     public static final int LIFT_LOWER_ID = 7;
     public static final int LIFT_UPPER_ID = 8;
+    //
     public static final int FORKSUD_ID = 4;
     public static final int RIGHT_SHOOTER_ID = 3;
     public static final int LEFT_SHOOTER_ID = 2;
+    //
     public static final int LOWER_LIFT_ENCODER_A = 5;
     public static final int LOWER_LIFT_ENCODER_B = 6;
+    //
     public static final int TRANS_LOW_ID = 0;
     public static final int TRANS_HIGH_ID = 1;
 
     //Numerical Constants
-    public static final int High_Shot = 1;
+    public static final double SHOOT_POWER = 1;
+    public static final double ROLLOUT_POWER = .9;
+    public static final double DROP_POWER = .65;
+    public static final double PICKUP_POWER = -.75;
+    public static final double SLOWUP_POWER = -.65;
+    public static final double STOP_POWER = 0;
     public static final double ONE_STICK_DRIVE = .5;
     //Stuff that isn't mine
     //Update times / rates
