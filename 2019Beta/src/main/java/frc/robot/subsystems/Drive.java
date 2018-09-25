@@ -330,7 +330,7 @@ public class Drive extends Subsystem {
         periodic.right_pos_ticks = -driveFrontRight.getSelectedSensorPosition(0);
         periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity(0);
         periodic.right_velocity_ticks_per_100ms = -driveFrontRight.getSelectedSensorVelocity(0);
-        periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw() + 360) % 360).rotateBy(mGyroOffset);
+        periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw())).rotateBy(mGyroOffset);
 
 
 
