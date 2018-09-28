@@ -397,12 +397,14 @@ public class Drive extends Subsystem {
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.write();
+            mCSVWriter.flush();
         }
     }
 
     public synchronized void startLogging() {
         if (mCSVWriter == null) {
             mCSVWriter = new ReflectingCSVWriter<>("/home/lvuser/DRIVE-LOGS.csv", PeriodicIO.class);
+
         }
     }
 
