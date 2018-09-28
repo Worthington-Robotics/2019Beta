@@ -64,8 +64,8 @@ public class Drive extends Subsystem {
 
                     case PROFILING_TEST:
                         if (DriverStation.getInstance().isTest()) {
-                            periodic.left_demand = -2 * Constants.TICKS_TO_INCHES;
-                            periodic.right_demand = -2 * Constants.TICKS_TO_INCHES;
+                            periodic.left_demand = -4 * Constants.TICKS_TO_INCHES;
+                            periodic.right_demand = -4 * Constants.TICKS_TO_INCHES;
                         }
                         break;
 

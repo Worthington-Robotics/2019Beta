@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.lib.geometry.Pose2d;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.StateMachine;
+import frc.lib.util.DriveSignal;
 import frc.robot.autoactiongroups.CrossTheLine;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Forks;
@@ -125,6 +126,7 @@ public class Robot extends TimedRobot {
         mDisabledLooper.stop();
         mEnabledLooper.start();
         Drive.getInstance().reset();
+        Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
 
     }

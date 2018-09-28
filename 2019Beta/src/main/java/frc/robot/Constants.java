@@ -14,6 +14,7 @@ public class Constants {
     public static final int EIGHT = 8;
     public static final int NINE = 9;
     public static final int TEN = 10;
+    public static final boolean TRUE = true;
     //Motors and Controllers
     public static final int DRIVE_FRONT_LEFT_ID = 1;
     public static final int DRIVE_MIDDLE_LEFT_ID = 2;
@@ -59,7 +60,7 @@ public class Constants {
     public static double LOOPER_DT = 0.01; //dt in seconds
 
     //MP Test mode values
-    public static boolean ENABLE_MP_TEST_MODE = false; //enables motion profiling test across all modes
+    public static boolean ENABLE_MP_TEST_MODE = !TRUE; //enables motion profiling test across all modes
     public static double MP_TEST_SPEED = 152;
 
     //Pure pursuit related values
