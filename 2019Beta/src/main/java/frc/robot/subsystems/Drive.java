@@ -436,18 +436,13 @@ public class Drive extends Subsystem {
         public Rotation2d gyro_heading = Rotation2d.identity();
         public Pose2d error = Pose2d.identity();
         public boolean B2 = false;
-        public boolean B6 = false;
-        public boolean B7 = false;
-        public boolean B10 = false;
-        public boolean B11 = false;
-        public boolean one_stick_drive = false;
 
         // OUTPUTS
         public double left_demand;
         public double right_demand;
         public double right_distance;
         public double left_distance;
-        public TimedState<Pose2dWithCurvature> path_setpoint = new TimedState<Pose2dWithCurvature>(Pose2dWithCurvature.identity());
+        public TimedState<Pose2dWithCurvature> path_setpoint = new TimedState<>(Pose2dWithCurvature.identity());
     }
 
 }

@@ -58,6 +58,7 @@ public class Robot extends TimedRobot {
         m_oi = new OI();
         SmartDashboard.putData("Auto mode", m_chooser);
         Drive.getInstance().reset();
+        Drive.getInstance().startLogging();
     }
 
     /**
@@ -104,7 +105,6 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void autonomousInit() {
-
         mDisabledLooper.stop();
         mEnabledLooper.start();
         Drive.getInstance().reset();
