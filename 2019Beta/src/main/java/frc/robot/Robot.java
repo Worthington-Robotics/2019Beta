@@ -58,7 +58,6 @@ public class Robot extends TimedRobot {
         m_oi = new OI();
         SmartDashboard.putData("Auto mode", m_chooser);
         Drive.getInstance().reset();
-        Drive.getInstance().startLogging();
     }
 
     /**
@@ -109,6 +108,7 @@ public class Robot extends TimedRobot {
         mEnabledLooper.start();
         Drive.getInstance().reset();
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
+        Drive.getInstance().startLogging();
         StateMachine.runMan(new CrossTheLine());
 
     }
