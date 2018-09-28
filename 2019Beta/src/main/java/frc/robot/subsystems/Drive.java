@@ -396,7 +396,6 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumberArray("drivevels", new double[] {periodic.left_velocity_ticks_per_100ms, periodic.right_velocity_ticks_per_100ms});
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
-            mCSVWriter.write();
             mCSVWriter.flush();
         }
     }
