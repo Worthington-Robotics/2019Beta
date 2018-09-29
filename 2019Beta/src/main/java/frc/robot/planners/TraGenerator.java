@@ -36,8 +36,8 @@ public class TraGenerator {
     public Trajectory<TimedState<Pose2dWithCurvature>> getTenFeet()
     {
         List<Pose2d> Points = new ArrayList<>();
-        Points.add(Pose2d.identity());
-        Points.add(new Pose2d(new Translation2d( -294.765 , 0), Rotation2d.identity()));
-        return generateTrajectory(false, Points, Arrays.asList(new CentripetalAccelerationConstraint(100.0)), 80.0, 80.0, 9.0);
+        Points.add(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
+        Points.add(new Pose2d(120 , 0, Rotation2d.fromDegrees(0)));
+        return generateTrajectory(false, Points, Arrays.asList(new CentripetalAccelerationConstraint(100.0)), 40.0, 40.0, 9.0);
     }
 }

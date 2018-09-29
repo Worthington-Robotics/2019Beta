@@ -132,6 +132,10 @@ public class Drive extends Subsystem {
         return rad_s / (Math.PI * 2.0) * 4096.0 / 10.0;
     }
 
+    private static double rpmToTicksPer100ms(double rpm) {
+        return ((rpm * 512.0) / 75.0);
+    }
+
     public synchronized Rotation2d getHeading() {
         return periodic.gyro_heading;
     }
@@ -224,7 +228,10 @@ public class Drive extends Subsystem {
             periodic.path_setpoint = mMotionPlanner.setpoint();
 
             if (!mOverrideTrajectory) {
-                setVelocity(new DriveSignal(inchesPerSecondToRpm(output.left_velocity), inchesPerSecondToRpm(output.right_velocity)));
+                DriveSignal signal = new DriveSignal(rpmToTicksPer100ms(inchesPerSecondToRpm(-output.left_velocity)),
+                        rpmToTicksPer100ms(inchesPerSecondToRpm(-output.right_velocity)));
+
+                setVelocity(signal);
                 //TODO will require additional math to convert from heading to steering angle
 
             } else {
@@ -326,9 +333,9 @@ public class Drive extends Subsystem {
         double prevLeftTicks = periodic.left_pos_ticks;
         double prevRightTicks = periodic.right_pos_ticks;
         periodic.B2 = Constants.MASTER.getRawButton(2);
-        periodic.left_pos_ticks = driveFrontLeft.getSelectedSensorPosition(0);
+        periodic.left_pos_ticks = -driveFrontLeft.getSelectedSensorPosition(0);
         periodic.right_pos_ticks = -driveFrontRight.getSelectedSensorPosition(0);
-        periodic.left_velocity_ticks_per_100ms = driveFrontLeft.getSelectedSensorVelocity(0);
+        periodic.left_velocity_ticks_per_100ms = -driveFrontLeft.getSelectedSensorVelocity(0);
         periodic.right_velocity_ticks_per_100ms = -driveFrontRight.getSelectedSensorVelocity(0);
         periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw())).rotateBy(mGyroOffset);
 
@@ -391,6 +398,7 @@ public class Drive extends Subsystem {
     public void outputTelemetry() {
         SmartDashboard.putNumber("Right", periodic.right_pos_ticks);
         SmartDashboard.putNumber("Left", periodic.left_pos_ticks);
+        SmartDashboard.putNumber("Heading", periodic.left_pos_ticks);
         SmartDashboard.putString("Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("drivedemands", new double[] {periodic.left_demand, periodic.right_demand});
         SmartDashboard.putNumberArray("drivevels", new double[] {periodic.left_velocity_ticks_per_100ms, periodic.right_velocity_ticks_per_100ms});
