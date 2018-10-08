@@ -52,7 +52,7 @@ public class Constants {
     public static final double SLOWUP_POWER = -.65;
     public static final double STOP_POWER = 0;
     public static final double ROTATIONS_TO_INCHES = .3857421875;
-    public static final double TICKS_TO_INCHES = 1580;
+    public static final double TICKS_TO_INCHES = 17925;
 
 
     //Stuff that isn't mine
@@ -65,10 +65,10 @@ public class Constants {
 
     //Pure pursuit related values
     public static final double kDriveWheelTrackWidthInches = 25.54;
-    public static final double kDriveWheelDiameterInches = 3.92820959548 * 0.99;
+    public static final double kDriveWheelDiameterInches = 6.5;
     public static final double kDriveWheelRadiusInches = kDriveWheelDiameterInches / 2.0;
     public static final double kTrackScrubFactor = 1.0;  // Tune me!
-    public static final double kRobotLinearInertia = 60.0;  // kg TODO tune
+    public static final double kRobotLinearInertia = 70.0;  // kg TODO tune
     public static final double kRobotAngularInertia = 10.0;  // kg m^2 TODO tune
     public static final double kRobotAngularDrag = 12.0;  // N*m / (rad/sec) TODO tune
     public static final double kRobotMaxVelocity = 120.0; // TODO tune & find units
@@ -77,7 +77,7 @@ public class Constants {
     public static final double kDriveVIntercept = 1.055;  // V
     public static final double kDriveKv = 0.135;  // V per rad/s
     public static final double kDriveKa = 0.012;  // V per rad/s^2
-    public static final double DRIVE_ENCODER_PPR = 4096.0; //encoder counts per revolution
+    public static final double DRIVE_ENCODER_PPR = 40960.0; //encoder counts per revolution
     public static final double kPathKX = 4.0;  // units/s per unit of error
     public static final double kPathLookaheadTime = 0.4;  // seconds to look ahead along the path for steering
     public static final double kPathMinLookaheadDistance = 24.0;  // inches
