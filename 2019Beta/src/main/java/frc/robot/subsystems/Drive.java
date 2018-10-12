@@ -398,7 +398,7 @@ public class Drive extends Subsystem {
     public void outputTelemetry() {
         SmartDashboard.putNumber("Right", periodic.right_pos_ticks);
         SmartDashboard.putNumber("Left", periodic.left_pos_ticks);
-        SmartDashboard.putNumber("Heading", periodic.left_pos_ticks);
+        SmartDashboard.putNumber("Heading", Ahrs.getYaw());
         SmartDashboard.putString("Drive State", mDriveControlState.toString());
         SmartDashboard.putNumberArray("drivedemands", new double[] {periodic.left_demand, periodic.right_demand});
         SmartDashboard.putNumberArray("drivevels", new double[] {periodic.left_velocity_ticks_per_100ms, periodic.right_velocity_ticks_per_100ms});
