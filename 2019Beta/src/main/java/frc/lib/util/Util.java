@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Util {
 
-    public static final double kEpsilon = 1e-12;
+    public static final double kEpsilon = 1e-9;
 
     /**
      * Prevent this class from being instantiated.
