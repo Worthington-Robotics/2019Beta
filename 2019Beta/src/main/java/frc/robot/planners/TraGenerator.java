@@ -37,8 +37,7 @@ public class TraGenerator {
     {
         List<Pose2d> Points = new ArrayList<>();
         Points.add(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
-        Points.add(new Pose2d(120*4/3,0, Rotation2d.fromDegrees(0)));
-        Points.add(new Pose2d(120*4/3,30*4/3, Rotation2d.fromDegrees(90)));
+        Points.add(new Pose2d(120,0, Rotation2d.fromDegrees(0)));
         return generateTrajectory(false, Points, Arrays.asList(new CentripetalAccelerationConstraint(100.0)), 120.0, 80.0, 8.0);
     }
 }
