@@ -17,6 +17,7 @@ import frc.lib.geometry.Pose2d;
 import frc.lib.loops.Looper;
 import frc.lib.statemachine.StateMachine;
 import frc.lib.util.DriveSignal;
+import frc.lib.util.LoggingSystem;
 import frc.robot.autoactiongroups.CrossTheLine;
 import frc.robot.subsystems.Drive;
 import frc.robot.subsystems.Forks;
@@ -34,6 +35,7 @@ import java.util.Arrays;
  * project.
  */
 public class Robot extends TimedRobot {
+    public static LoggingSystem Logger;
     public static OI m_oi;
     private final SubsystemManager mSubsystemManager = new SubsystemManager(Arrays.asList(
             RobotStateEstimator.getInstance(),
@@ -52,6 +54,19 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void robotInit() {
+        Logger = new LoggingSystem();
+        Logger.addWatchKey("Left");
+        Logger.addWatchKey("Right");
+        Logger.addWatchKey("Robot Linear Velocity");
+        Logger.addWatchKey("Robot Pose Theta");
+        Logger.addWatchKey("Robot Pose X");
+        Logger.addWatchKey("Robot Pose Y");
+        Logger.addWatchKey("Robot Error Theta");
+        Logger.addWatchKey("Robot Error X");
+        Logger.addWatchKey("Robot Error Y");
+        Logger.addWatchKey("Robot Setpoint Theta");
+        Logger.addWatchKey("Robot Setpoint X");
+        Logger.addWatchKey("Robot Setpoint Y");
         mSubsystemManager.registerEnabledLoops(mEnabledLooper);
         mSubsystemManager.registerDisabledLoops(mDisabledLooper);
         mDisabledLooper.start();
@@ -108,7 +123,8 @@ public class Robot extends TimedRobot {
         mEnabledLooper.start();
         Drive.getInstance().reset();
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
-        Drive.getInstance().startLogging();
+        //Drive.getInstance().startLogging();
+        Logger.enablePrint(Constants.TRUE);
         StateMachine.runMan(new CrossTheLine());
 
     }
@@ -128,6 +144,7 @@ public class Robot extends TimedRobot {
         Drive.getInstance().reset();
         Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
+        Logger.enablePrint(!Constants.TRUE);
 
     }
 

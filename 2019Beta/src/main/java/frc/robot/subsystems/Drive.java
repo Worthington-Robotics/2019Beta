@@ -400,8 +400,14 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Left", periodic.left_pos_ticks);
         SmartDashboard.putNumber("Heading", Ahrs.getYaw());
         SmartDashboard.putString("Drive State", mDriveControlState.toString());
-        SmartDashboard.putNumberArray("drivedemands", new double[] {periodic.left_demand, periodic.right_demand});
-        SmartDashboard.putNumberArray("drivevels", new double[] {periodic.left_velocity_ticks_per_100ms, periodic.right_velocity_ticks_per_100ms});
+        SmartDashboard.putNumberArray("drivedemands", new double[]{periodic.left_demand, periodic.right_demand});
+        SmartDashboard.putNumberArray("drivevels", new double[]{periodic.left_velocity_ticks_per_100ms, periodic.right_velocity_ticks_per_100ms});
+        SmartDashboard.putNumber("Robot Error X", periodic.error.getTranslation().x());
+        SmartDashboard.putNumber("Robot Error Y", periodic.error.getTranslation().y());
+        SmartDashboard.putNumber("Robot Error Theta", periodic.error.getRotation().getDegrees());
+        SmartDashboard.putNumber("Robot Setpoint X", periodic.path_setpoint.state().getTranslation().x());
+        SmartDashboard.putNumber("Robot Setpoint Y", periodic.path_setpoint.state().getTranslation().y());
+        SmartDashboard.putNumber("Robot Setpoint Theta", periodic.path_setpoint.state().getRotation().getDegrees());
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.flush();
@@ -410,7 +416,8 @@ public class Drive extends Subsystem {
 
     public synchronized void startLogging() {
         if (mCSVWriter == null) {
-            mCSVWriter = new ReflectingCSVWriter<>("/home/lvuser/DRIVE-LOGS.csv", PeriodicIO.class);
+            //System.out.println("Logging start");
+            //mCSVWriter = new ReflectingCSVWriter<>("/home/lvuser/DRIVE-LOGS.csv", PeriodicIO.class);
 
         }
     }

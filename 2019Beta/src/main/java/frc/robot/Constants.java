@@ -39,7 +39,7 @@ public class Constants {
     public static final double kDriveWheelDiameterInches = 6;
     public static final double kDriveWheelRadiusInches = kDriveWheelDiameterInches / 2.0;
     public static final double kTrackScrubFactor = 1.0;  // Tune me!
-    public static final double kRobotLinearInertia = 70.0;  // kg TODO tune
+    public static final double kRobotLinearInertia = 66.5;  // kg TODO tune
     public static final double kRobotAngularInertia = 10.0;  // kg m^2 TODO tune
     public static final double kRobotAngularDrag = 12.0;  // N*m / (rad/sec) TODO tune
     public static final double kRobotMaxVelocity = 120.0; // TODO tune & find units
@@ -62,7 +62,8 @@ public class Constants {
     public static final double STOP_POWER = 0;
     public static final double TICKS_TO_INCHES = 1625;
     public static final double ROTATIONS_TO_INCHES = TICKS_TO_INCHES/DRIVE_ENCODER_PPR;
-
+    public static final String ROBOT_NAME = "Whatever_you_want";
+    public static final double LOGGING_UPDATE_RATE = .02;
 
 
     //Stuff that isn't mine
@@ -71,18 +72,19 @@ public class Constants {
 
     //MP Test mode values
     public static boolean ENABLE_MP_TEST_MODE = !TRUE; //enables motion profiling test across all modes
-    public static double MP_TEST_SPEED = 152;
+    public static double MP_TEST_SPEED = 180;
 
 
 
     //logging directories
-    public static String DRIVE_PATH_1 = "/media/sda"; // top usb port
+    public static String DRIVE_PATH_1 = "/media/sda1"; // top usb port
     public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
     public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, 0.45, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.05, 1.0, 1.0, 1.0, 2);
 
+    public static boolean isCompBot = TRUE;
 }
 
 
