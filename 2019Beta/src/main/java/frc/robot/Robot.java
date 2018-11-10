@@ -128,7 +128,7 @@ public class Robot extends TimedRobot {
         Drive.getInstance().reset();
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
         //Drive.getInstance().startLogging();
-        Logger.enablePrint(Constants.TRUE);
+        Logger.enablePrint(true);
         StateMachine.runMan(new CrossTheLine());
 
     }
@@ -148,7 +148,7 @@ public class Robot extends TimedRobot {
         Drive.getInstance().reset();
         Drive.getInstance().setOpenLoop(DriveSignal.NEUTRAL);
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
-        Logger.enablePrint(!Constants.TRUE);
+        Logger.enablePrint(false);
 
     }
 

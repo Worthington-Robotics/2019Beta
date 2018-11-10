@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="252ce1d5-ecdb-41ee-9c0c-67425a2efa99" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -145,12 +147,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="395" />
+          <entry key="java" value="686" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="395" />
+          <entry key="JAVA" value="686" />
         </counts>
       </usages-collector>
     </session>
@@ -188,11 +190,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Robot.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="90" column="33" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
+            <state relative-caret-position="3">
+              <caret line="150" column="32" selection-start-line="150" selection-start-column="32" selection-end-line="150" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -209,11 +211,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+            <state relative-caret-position="-816">
+              <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -224,8 +226,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1547">
-              <caret line="69" column="76" selection-start-line="69" selection-start-column="76" selection-end-line="69" selection-end-column="76" />
+            <state relative-caret-position="306">
+              <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
             </state>
           </provider>
         </entry>
@@ -753,10 +755,10 @@
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/planners/DriveMotionPlanner.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/util/Util.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/planners/TraGenerator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/lib/util/LoggingSystem.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java" />
         <option value="$PROJECT_DIR$/src/main/java/frc/robot/Constants.java" />
+        <option value="$PROJECT_DIR$/src/main/java/frc/robot/Robot.java" />
       </list>
     </option>
   </component>
@@ -863,14 +865,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/2019Beta/2019Beta/src/main/java/frc/robot/planners/TraGenerator.java" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541874823746" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541876318892" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
@@ -900,7 +902,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Gradle.2019Beta [deploy]">
+  <component name="RunManager" selected="Gradle.2019Beta [build]">
     <configuration name="2019Beta [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -962,9 +964,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.2019Beta [build]" />
         <item itemvalue="Gradle.2019Beta [deploy]" />
         <item itemvalue="Gradle.2019Beta [discoverRoborio]" />
-        <item itemvalue="Gradle.2019Beta [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -985,7 +987,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.10892587" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10872483" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -994,7 +996,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3286334" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24728851" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24697986" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -1328,13 +1330,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Robot.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="90" column="33" selection-start-line="90" selection-start-column="33" selection-end-line="90" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/planners/DriveMotionPlanner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="680">
@@ -1368,18 +1363,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/subsystems/Drive.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1547">
-          <caret line="69" column="76" selection-start-line="69" selection-start-column="76" selection-end-line="69" selection-end-column="76" />
+        <state relative-caret-position="306">
+          <caret line="67" column="76" selection-start-line="67" selection-start-column="76" selection-end-line="67" selection-end-column="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="64" column="45" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
+        <state relative-caret-position="-816">
+          <caret line="5" column="24" selection-start-line="5" selection-start-column="24" selection-end-line="5" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/frc/robot/Robot.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3">
+          <caret line="150" column="32" selection-start-line="150" selection-start-column="32" selection-end-line="150" selection-end-column="32" />
         </state>
       </provider>
     </entry>

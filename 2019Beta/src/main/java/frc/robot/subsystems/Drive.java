@@ -23,8 +23,6 @@ import frc.robot.Constants;
 import frc.robot.RobotState;
 import frc.robot.planners.DriveMotionPlanner;
 
-import java.awt.image.SampleModel;
-
 public class Drive extends Subsystem {
 
     //used internally for data
@@ -199,16 +197,16 @@ public class Drive extends Subsystem {
         driveFrontLeft.setSensorPhase(false);
         driveFrontRight.setSensorPhase(true);
         driveFrontLeft.selectProfileSlot(0, 0);
-        driveFrontLeft.config_kF(0, Constants.LKF, 0);
-        driveFrontLeft.config_kP(0, Constants.LKP, 0);
-        driveFrontLeft.config_kI(0, Constants.LKI, 0);
-        driveFrontLeft.config_kD(0, Constants.LKD, 0);
+        driveFrontLeft.config_kF(0, Constants.DRIVE_LEFT_KF, 0);
+        driveFrontLeft.config_kP(0, Constants.DRIVE_LEFT_KP, 0);
+        driveFrontLeft.config_kI(0, Constants.DRIVE_LEFT_KI, 0);
+        driveFrontLeft.config_kD(0, Constants.DRIVE_LEFT_KD, 0);
         driveFrontLeft.config_IntegralZone(0, 0, 0);
         driveFrontRight.selectProfileSlot(0, 0);
-        driveFrontRight.config_kF(0, Constants.RKF, 0);
-        driveFrontRight.config_kP(0, Constants.RKP, 0);
-        driveFrontRight.config_kI(0, Constants.RKI, 0);
-        driveFrontRight.config_kD(0, Constants.RKD, 0);
+        driveFrontRight.config_kF(0, Constants.DRIVE_RIGHT_KF, 0);
+        driveFrontRight.config_kP(0, Constants.DRIVE_RIGHT_KP, 0);
+        driveFrontRight.config_kI(0, Constants.DRIVE_RIGHT_KI, 0);
+        driveFrontRight.config_kD(0, Constants.DRIVE_RIGHT_KD, 0);
         driveFrontRight.config_IntegralZone(0, 0, 0);
         //driveFrontRight.
 
