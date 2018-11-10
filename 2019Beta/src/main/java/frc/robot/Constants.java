@@ -55,6 +55,15 @@ public class Constants {
     public static final double SLOWUP_POWER = -.65;
     public static final double STOP_POWER = 0;
 
+    public static final double RKP = 0.2051;
+    public static final double RKI = 0;
+    public static final double RKD = 0.3;
+    public static final double RKF = 0.07185;
+    public static final double LKP = 0.2051;
+    public static final double LKI = 0;
+    public static final double LKD = 0.3;
+    public static final double LKF = 0.07185;
+
     //Update times / rates
     public static double LOOPER_DT = 0.01; //dt in seconds
     public static final double LOGGING_UPDATE_RATE = .02;
