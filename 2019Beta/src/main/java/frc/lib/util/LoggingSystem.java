@@ -35,6 +35,7 @@ public class LoggingSystem {
         loggerThread = new Notifier(runnable);
         try {
             base = getMount();
+            System.out.println(base.getAbsolutePath());
             printWriter = new PrintWriter(new BufferedWriter(new FileWriter(base)));
             initSuccess = true;
         } catch (Exception e) {
@@ -103,8 +104,31 @@ public class LoggingSystem {
             printWriter.flush();
         }
     }
-
     private File getMount() {
+        File media = new File("/media");
+        File logging_path = null;
+        for(File mount : media.listFiles())
+        {
+            logging_path = new File(mount.getAbsolutePath() + "/logging");
+            if(logging_path.isDirectory()) {
+                System.out.println(logging_path.getAbsolutePath());
+                break;
+            }
+            logging_path = null;
+        }
+        if (!logging_path.equals(null)) {
+            SimpleDateFormat outputFormatter = new SimpleDateFormat("yyyyMMdd_HHmmss_SSS");
+            outputFormatter.setTimeZone(TimeZone.getTimeZone("US/Eastern"));
+            String newDateString = outputFormatter.format(new Date());
+            // build the new filename
+            String fileName = newDateString + "_LOG.tsv";
+            // build the full file path name
+            return new File(logging_path.getAbsolutePath() + File.separator + fileName);
+        }
+        return null;
+    }
+
+    /*private File getMount() {
         File mountPoint;
         // find the mount point
         File testPoint = new File(Constants.DRIVE_PATH_1 + "/logging");
@@ -128,6 +152,7 @@ public class LoggingSystem {
             return new File(mountPoint.getAbsolutePath() + File.separator + fileName);
         }
         return null;
-    }
+    }*/
+
 
 }

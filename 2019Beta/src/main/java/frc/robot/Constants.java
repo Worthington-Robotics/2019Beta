@@ -14,14 +14,14 @@ public class Constants {
     public static final int DRIVE_BACK_RIGHT_ID = 6;
     public static final int LIFT_LOWER_ID = 7;
     public static final int LIFT_UPPER_ID = 8;
-    public static final double RKP = 0.085;
+    public static final double RKP = 0.2051;
     public static final double RKI = 0;
-    public static final double RKD = .175;
-    public static final double RKF = 0.0824;
-    public static final double LKP = 0.085;
+    public static final double RKD = 0.3;
+    public static final double RKF = 0.07185;
+    public static final double LKP = 0.2051;
     public static final double LKI = 0;
-    public static final double LKD = .175;
-    public static final double LKF = 0.0824;
+    public static final double LKD = 0.3;
+    public static final double LKF = 0.07185;
 
     //
     public static final int FORKSUD_ID = 4;
@@ -35,8 +35,8 @@ public class Constants {
     public static final int TRANS_HIGH_ID = 1;
 
     //Pure pursuit related values
-    public static final double kDriveWheelTrackWidthInches = 25.54;
-    public static final double kDriveWheelDiameterInches = 6;
+    public static final double kDriveWheelTrackWidthInches = 23.54;
+    public static final double kDriveWheelDiameterInches = 6.5;
     public static final double kDriveWheelRadiusInches = kDriveWheelDiameterInches / 2.0;
     public static final double kTrackScrubFactor = 1.0;  // Tune me!
     public static final double kRobotLinearInertia = 66.5;  // kg TODO tune
@@ -71,17 +71,15 @@ public class Constants {
     public static double LOOPER_DT = 0.01; //dt in seconds
 
     //MP Test mode values
-    public static boolean ENABLE_MP_TEST_MODE = !TRUE; //enables motion profiling test across all modes
-    public static double MP_TEST_SPEED = 180;
+    public static boolean ENABLE_MP_TEST_MODE = TRUE; //enables motion profiling test across all modes
+    public static double MP_TEST_SPEED = 12;
 
 
 
     //logging directories
-    public static String DRIVE_PATH_1 = "/media/sda1"; // top usb port
-    public static String DRIVE_PATH_2 = "/media/sdb"; // bottom usb port
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, 0.45, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, -0.45, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.05, 1.0, 1.0, 1.0, 2);
 
     public static boolean isCompBot = TRUE;

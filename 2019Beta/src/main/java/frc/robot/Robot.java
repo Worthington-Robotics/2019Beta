@@ -67,6 +67,10 @@ public class Robot extends TimedRobot {
         Logger.addWatchKey("Robot Setpoint Theta");
         Logger.addWatchKey("Robot Setpoint X");
         Logger.addWatchKey("Robot Setpoint Y");
+        Logger.addWatchKey("Right Talon Velocity");
+        Logger.addWatchKey("Left Talon Velocity");
+        Logger.addWatchKey("Right Talon Error");
+        Logger.addWatchKey("Left Talon Error");
         mSubsystemManager.registerEnabledLoops(mEnabledLooper);
         mSubsystemManager.registerDisabledLoops(mDisabledLooper);
         mDisabledLooper.start();

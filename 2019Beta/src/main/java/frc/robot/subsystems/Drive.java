@@ -23,6 +23,8 @@ import frc.robot.Constants;
 import frc.robot.RobotState;
 import frc.robot.planners.DriveMotionPlanner;
 
+import java.awt.image.SampleModel;
+
 public class Drive extends Subsystem {
 
     //used internally for data
@@ -367,18 +369,18 @@ public class Drive extends Subsystem {
     public synchronized void writePeriodicOutputs() {
         if (mDriveControlState == DriveControlState.OPEN_LOOP) {
             //TODO write open loop outputs
-            driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
+            driveFrontLeft.set(ControlMode.PercentOutput, periodic.right_demand);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
-            driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
+            driveFrontRight.set(ControlMode.PercentOutput, periodic.left_demand);
             driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
         } else {
             //TODO write velocity control mode outputs
-            driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand, DemandType.ArbitraryFeedForward, 0.0);
+            driveFrontLeft.set(ControlMode.Velocity, periodic.right_demand, DemandType.ArbitraryFeedForward, 0.0);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
-            driveFrontRight.set(ControlMode.Velocity, periodic.right_demand, DemandType.ArbitraryFeedForward, 0.0);
+            driveFrontRight.set(ControlMode.Velocity, periodic.left_demand, DemandType.ArbitraryFeedForward, 0.0);
             driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             /*mLeftMaster.set(ControlMode.Velocity, periodic.linear_demand, DemandType.ArbitraryFeedForward,
@@ -408,6 +410,10 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Robot Setpoint X", periodic.path_setpoint.state().getTranslation().x());
         SmartDashboard.putNumber("Robot Setpoint Y", periodic.path_setpoint.state().getTranslation().y());
         SmartDashboard.putNumber("Robot Setpoint Theta", periodic.path_setpoint.state().getRotation().getDegrees());
+        SmartDashboard.putNumber("Left Talon Velocity", periodic.left_velocity_ticks_per_100ms);
+        SmartDashboard.putNumber("Right Talon Velocity", periodic.right_velocity_ticks_per_100ms);
+        SmartDashboard.putNumber("Right Talon Error" , driveFrontRight.getClosedLoopError(0));
+        SmartDashboard.putNumber("Left Talon Error" , driveFrontLeft.getClosedLoopError(0));
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.flush();
