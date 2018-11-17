@@ -48,7 +48,7 @@ public class LoggingSystem {
         String COMP_MSG = "THIS IS THE COMPETITION SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n";
 
         String PRAC_MSG = "THIS IS THE PRACTICE SOFTWARE CONFIG! CHECK IF ROBOT MATCHES!\n";
-        DriverStation.reportWarning(Constants.isCompBot ? COMP_MSG : PRAC_MSG, false);
+        DriverStation.reportWarning(Constants.IS_COMP_BOT ? COMP_MSG : PRAC_MSG, false);
         try {
             //get the path of the currently executing jar file
             String currentJarFilePath = Robot.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();

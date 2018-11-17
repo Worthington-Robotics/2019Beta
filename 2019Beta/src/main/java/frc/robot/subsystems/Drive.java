@@ -44,6 +44,7 @@ public class Drive extends Subsystem {
     private WPI_TalonSRX driveBackRight;
     private double[] operatorInput = {0, 0, 0}; //last input set from joystick update
     private AHRS Ahrs;
+    private int ramp_Up_Counter = 0;
     private final Loop mLoop = new Loop() {
 
         @Override
@@ -56,18 +57,25 @@ public class Drive extends Subsystem {
         @Override
         public void onLoop(double timestamp) {
             synchronized (Drive.this) {
-                if (Constants.ENABLE_MP_TEST_MODE) mDriveControlState = DriveControlState.PROFILING_TEST;
+                if (Constants.ENABLE_MP_TEST_MODE && DriverStation.getInstance().isTest())
+                    mDriveControlState = DriveControlState.PROFILING_TEST;
                 switch (mDriveControlState) {
                     case PATH_FOLLOWING:
                         updatePathFollower();
                         break;
 
                     case PROFILING_TEST:
-                        if (DriverStation.getInstance().isTest()) {
+                        if (Constants.RAMPUP) {
+                            periodic.left_demand = -ramp_Up_Counter * .05 * Constants.TICKS_TO_INCHES;
+                            periodic.right_demand = -ramp_Up_Counter * .05 * Constants.TICKS_TO_INCHES;
+                            ramp_Up_Counter++;
+                        } else if (DriverStation.getInstance().isTest()) {
                             periodic.left_demand = -Constants.MP_TEST_SPEED * Constants.TICKS_TO_INCHES;
                             periodic.right_demand = -Constants.MP_TEST_SPEED * Constants.TICKS_TO_INCHES;
                         }
+
                         break;
+
 
                     case OPEN_LOOP:
                         if (DriverStation.getInstance().isOperatorControl())
@@ -187,11 +195,13 @@ public class Drive extends Subsystem {
 
     public void reset() {
         mOverrideTrajectory = false;
+
         mMotionPlanner.reset();
         Ahrs.reset();
         periodic = new PeriodicIO();
         periodic.right_pos_ticks = 0;
         periodic.left_pos_ticks = 0;
+        ramp_Up_Counter = 0;
         driveFrontRight.setSelectedSensorPosition(0, 0, 0);
         driveFrontLeft.setSelectedSensorPosition(0, 0, 0);
         driveFrontLeft.setSensorPhase(false);
@@ -228,8 +238,8 @@ public class Drive extends Subsystem {
             periodic.path_setpoint = mMotionPlanner.setpoint();
 
             if (!mOverrideTrajectory) {
-                DriveSignal signal = new DriveSignal(rpmToTicksPer100ms(inchesPerSecondToRpm(-output.left_velocity)),
-                        rpmToTicksPer100ms(inchesPerSecondToRpm(-output.right_velocity)));
+                DriveSignal signal = new DriveSignal(rpmToTicksPer100ms(inchesPerSecondToRpm(-output.right_velocity)),
+                        rpmToTicksPer100ms(inchesPerSecondToRpm(-output.left_velocity)));
 
                 setVelocity(signal);
                 //TODO will require additional math to convert from heading to steering angle
@@ -340,7 +350,6 @@ public class Drive extends Subsystem {
         periodic.gyro_heading = Rotation2d.fromDegrees((Ahrs.getYaw())).rotateBy(mGyroOffset);
 
 
-
         double deltaLeftTicks = ((periodic.left_pos_ticks - prevLeftTicks) / 4096.0) * Math.PI;
         if (deltaLeftTicks > 0.0) {
             periodic.left_distance += deltaLeftTicks * Constants.kDriveWheelDiameterInches;
@@ -367,18 +376,18 @@ public class Drive extends Subsystem {
     public synchronized void writePeriodicOutputs() {
         if (mDriveControlState == DriveControlState.OPEN_LOOP) {
             //TODO write open loop outputs
-            driveFrontLeft.set(ControlMode.PercentOutput, periodic.right_demand);
+            driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
-            driveFrontRight.set(ControlMode.PercentOutput, periodic.left_demand);
+            driveFrontRight.set(ControlMode.PercentOutput, periodic.right_demand);
             driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
         } else {
             //TODO write velocity control mode outputs
-            driveFrontLeft.set(ControlMode.Velocity, periodic.right_demand, DemandType.ArbitraryFeedForward, 0.0);
+            driveFrontLeft.set(ControlMode.Velocity, periodic.left_demand, DemandType.ArbitraryFeedForward, 0.0);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
             driveBackLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
-            driveFrontRight.set(ControlMode.Velocity, periodic.left_demand, DemandType.ArbitraryFeedForward, 0.0);
+            driveFrontRight.set(ControlMode.Velocity, periodic.right_demand, DemandType.ArbitraryFeedForward, 0.0);
             driveMiddleRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             driveBackRight.set(ControlMode.Follower, driveFrontRight.getDeviceID());
             /*mLeftMaster.set(ControlMode.Velocity, periodic.linear_demand, DemandType.ArbitraryFeedForward,
@@ -410,8 +419,12 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Robot Setpoint Theta", periodic.path_setpoint.state().getRotation().getDegrees());
         SmartDashboard.putNumber("Left Talon Velocity", periodic.left_velocity_ticks_per_100ms);
         SmartDashboard.putNumber("Right Talon Velocity", periodic.right_velocity_ticks_per_100ms);
-        SmartDashboard.putNumber("Right Talon Error" , driveFrontRight.getClosedLoopError(0));
-        SmartDashboard.putNumber("Left Talon Error" , driveFrontLeft.getClosedLoopError(0));
+        SmartDashboard.putNumber("Right Talon Error", driveFrontRight.getClosedLoopError(0));
+        SmartDashboard.putNumber("Left Talon Error", driveFrontLeft.getClosedLoopError(0));
+        SmartDashboard.putNumber("Right Talon Voltage", driveFrontRight.getBusVoltage());
+        SmartDashboard.putNumber("Left Talon Voltage", driveFrontLeft.getBusVoltage());
+        SmartDashboard.putNumber("Right Talon Voltage II", driveFrontRight.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Left Talon Voltage II", driveFrontLeft.getMotorOutputVoltage());
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.flush();

@@ -38,7 +38,7 @@ public class Constants {
     public static final double kRobotMaxVelocity = 120.0; // TODO tune & find units
     public static final double kRobotMaxAccel = 120.0; // TODO tune & find units
     public static final double kRobotMaxVoltage = 10.0; // V TODO tune
-    public static final double kDriveVIntercept = 1.055;  // V
+    public static final double kDriveVIntercept = 1;  // V
     public static final double kDriveKv = 0.135;  // V per rad/s
     public static final double kDriveKa = 0.012;  // V per rad/s^2
     public static final double kPathKX = 4.0;  // units/s per unit of error
@@ -57,32 +57,34 @@ public class Constants {
     public static final double STOP_POWER = 0;
 
     //PID Gain Constants
-    public static final double DRIVE_RIGHT_KP = 0.2051;
+    public static final double DRIVE_RIGHT_KP = 0.0885;
     public static final double DRIVE_RIGHT_KI = 0;
-    public static final double DRIVE_RIGHT_KD = 0.3;
-    public static final double DRIVE_RIGHT_KF = 0.07185;
-    public static final double DRIVE_LEFT_KP = 0.2051;
+    public static final double DRIVE_RIGHT_KD = 4.5;
+    public static final double DRIVE_RIGHT_KF = .066;
+    public static final double DRIVE_LEFT_KP = 0.1;
     public static final double DRIVE_LEFT_KI = 0;
-    public static final double DRIVE_LEFT_KD = 0.3;
-    public static final double DRIVE_LEFT_KF = 0.07185;
+    public static final double DRIVE_LEFT_KD = 4.5;
+    public static final double DRIVE_LEFT_KF = .066;
 
     //Update times / rates
     public static final double LOOPER_DT = 0.01; //dt in seconds
     public static final double LOGGING_UPDATE_RATE = .02;
 
     //MP Test mode values
-    public static final boolean ENABLE_MP_TEST_MODE = !true; //enables motion profiling test across all modes
-    public static final double MP_TEST_SPEED = 12;
+    public static final boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
+    public static final double MP_TEST_SPEED = 10;
+    public static final boolean RAMPUP = true;
 
     //Stick Constants
     public static final Joystick MASTER = new Joystick(0);
     public static final Joystick SECOND = new Joystick(1);
-    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, -0.45, 2);
+    public static final HIDHelper.HIDConstants MASTER_STICK = new HIDHelper.HIDConstants(MASTER, 0.15, 1.0, 1.0, 0.45, 2);
     public static final HIDHelper.HIDConstants SECOND_STICK = new HIDHelper.HIDConstants(SECOND, 0.05, 1.0, 1.0, 1.0, 2);
 
     //Startup Constants
-    public static final boolean isCompBot = true;
+    public static final boolean IS_COMP_BOT = true;
     public static final String ROBOT_NAME = "Whatever_you_want";
 }
+
 
 

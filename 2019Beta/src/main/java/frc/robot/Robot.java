@@ -71,6 +71,10 @@ public class Robot extends TimedRobot {
         Logger.addWatchKey("Left Talon Velocity");
         Logger.addWatchKey("Right Talon Error");
         Logger.addWatchKey("Left Talon Error");
+        Logger.addWatchKey("Right Talon Voltage");
+        Logger.addWatchKey("Left Talon Voltage");
+        Logger.addWatchKey("Right Talon Voltage II");
+        Logger.addWatchKey("Left Talon Voltage II");
         mSubsystemManager.registerEnabledLoops(mEnabledLooper);
         mSubsystemManager.registerDisabledLoops(mDisabledLooper);
         mDisabledLooper.start();
@@ -166,6 +170,7 @@ public class Robot extends TimedRobot {
         mEnabledLooper.start();
         Drive.getInstance().reset();
         RobotState.getInstance().reset(Timer.getFPGATimestamp(), Pose2d.identity());
+        Logger.enablePrint(!false);
     }
     /**
      * This function is called periodically during test mode.
