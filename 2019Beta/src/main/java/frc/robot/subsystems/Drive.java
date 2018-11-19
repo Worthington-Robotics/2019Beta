@@ -66,8 +66,8 @@ public class Drive extends Subsystem {
 
                     case PROFILING_TEST:
                         if (Constants.RAMPUP) {
-                            periodic.left_demand = -ramp_Up_Counter * .05 * Constants.TICKS_TO_INCHES;
-                            periodic.right_demand = -ramp_Up_Counter * .05 * Constants.TICKS_TO_INCHES;
+                            periodic.left_demand = -ramp_Up_Counter * .0025;
+                            periodic.right_demand = -ramp_Up_Counter * .0025;
                             ramp_Up_Counter++;
                         } else if (DriverStation.getInstance().isTest()) {
                             periodic.left_demand = -Constants.MP_TEST_SPEED * Constants.TICKS_TO_INCHES;
@@ -196,7 +196,9 @@ public class Drive extends Subsystem {
     public void reset() {
         mOverrideTrajectory = false;
 
+
         mMotionPlanner.reset();
+        mMotionPlanner.setFollowerType(DriveMotionPlanner.FollowerType.FEEDFORWARD_ONLY);
         Ahrs.reset();
         periodic = new PeriodicIO();
         periodic.right_pos_ticks = 0;
@@ -374,7 +376,7 @@ public class Drive extends Subsystem {
 
     @Override
     public synchronized void writePeriodicOutputs() {
-        if (mDriveControlState == DriveControlState.OPEN_LOOP) {
+        if (mDriveControlState == DriveControlState.OPEN_LOOP || (mDriveControlState == DriveControlState.PROFILING_TEST && Constants.RAMPUP)) {
             //TODO write open loop outputs
             driveFrontLeft.set(ControlMode.PercentOutput, periodic.left_demand);
             driveMiddleLeft.set(ControlMode.Follower, driveFrontLeft.getDeviceID());
@@ -425,6 +427,8 @@ public class Drive extends Subsystem {
         SmartDashboard.putNumber("Left Talon Voltage", driveFrontLeft.getBusVoltage());
         SmartDashboard.putNumber("Right Talon Voltage II", driveFrontRight.getMotorOutputVoltage());
         SmartDashboard.putNumber("Left Talon Voltage II", driveFrontLeft.getMotorOutputVoltage());
+        SmartDashboard.putNumber("Right Encoder Counts", periodic.right_pos_ticks);
+        SmartDashboard.putNumber("Left Encoder Counts", periodic.left_pos_ticks);
         if (mCSVWriter != null) {
             mCSVWriter.add(periodic);
             mCSVWriter.flush();

@@ -19,6 +19,7 @@ public class TraGenerator {
 
     private TraGenerator() {
         DMP = new DriveMotionPlanner();
+        DMP.setFollowerType(DriveMotionPlanner.FollowerType.FEEDFORWARD_ONLY);
     }
 
     public static TraGenerator getInstance() {
@@ -37,12 +38,11 @@ public class TraGenerator {
     {
         List<Pose2d> Points = new ArrayList<>();
         Points.add(new Pose2d(0, 0, Rotation2d.fromDegrees(0)));
-        Points.add(new Pose2d(60, 60, Rotation2d.fromDegrees(90)));
-        Points.add(new Pose2d(0,120, Rotation2d.fromDegrees(180)));
-        Points.add(new Pose2d(-60,60, Rotation2d.fromDegrees(270)));
-        Points.add(new Pose2d(0,0, Rotation2d.fromDegrees(0)));
+        Points.add(new Pose2d(120, 0, Rotation2d.fromDegrees(0)));
 
 
-        return generateTrajectory(false, Points, Arrays.asList(new CentripetalAccelerationConstraint(100.0)), 120.0, 80.0, 12.0);
+
+
+        return generateTrajectory(false, Points, Arrays.asList(new CentripetalAccelerationConstraint(100.0)), 120.0, 120.0, 12.0);
     }
 }
