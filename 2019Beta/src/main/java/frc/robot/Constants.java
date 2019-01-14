@@ -38,9 +38,9 @@ public class Constants {
     public static final double kRobotMaxVelocity = 120.0; // TODO tune & find units
     public static final double kRobotMaxAccel = 120.0; // TODO tune & find units
     public static final double kRobotMaxVoltage = 10.0; // V TODO tune
-    public static final double kDriveVIntercept = 2;  // V
+    public static final double kDriveVIntercept = 1.1;  // V
     public static final double kDriveKv = 0.584;  // V per rad/s
-    public static final double kDriveKa = 0.584;  // V per rad/s^2
+    public static final double kDriveKa = 0.1;  // V per rad/s^2
     public static final double kPathKX = 4.0;  //
     // units/s per unit of error
     public static final double kPathLookaheadTime = 0.4;  // seconds to look ahead along the path for steering
@@ -60,11 +60,11 @@ public class Constants {
     //PID Gain Constants
     public static final double DRIVE_RIGHT_KP = 0.0885;
     public static final double DRIVE_RIGHT_KI = 0;
-    public static final double DRIVE_RIGHT_KD = 4.5;
+    public static final double DRIVE_RIGHT_KD = 6;
     public static final double DRIVE_RIGHT_KF = .066;
-    public static final double DRIVE_LEFT_KP = 0.1;
+    public static final double DRIVE_LEFT_KP = 0.0885;
     public static final double DRIVE_LEFT_KI = 0;
-    public static final double DRIVE_LEFT_KD = 4.5;
+    public static final double DRIVE_LEFT_KD = 6;
     public static final double DRIVE_LEFT_KF = .066;
 
     //Update times / rates
@@ -72,8 +72,8 @@ public class Constants {
     public static final double LOGGING_UPDATE_RATE = .02;
 
     //MP Test mode values
-    public static final boolean ENABLE_MP_TEST_MODE = !true; //enables motion profiling test across all modes
-    public static final double MP_TEST_SPEED = 10;
+    public static final boolean ENABLE_MP_TEST_MODE = true; //enables motion profiling test across all modes
+    public static final double MP_TEST_SPEED = 4;
     public static final boolean RAMPUP = !true;
 
     //Stick Constants

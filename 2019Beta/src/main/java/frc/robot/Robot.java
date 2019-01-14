@@ -77,6 +77,10 @@ public class Robot extends TimedRobot {
         Logger.addWatchKey("Left Talon Voltage II");
         Logger.addWatchKey("Right Encoder Counts");
         Logger.addWatchKey("Left Encoder Counts");
+        Logger.addWatchKey("Left FeedForward");
+        Logger.addWatchKey("Right FeedForward");
+        Logger.addWatchKey("Left Acceleration");
+        Logger.addWatchKey("Right Acceleration");
 
         mSubsystemManager.registerEnabledLoops(mEnabledLooper);
         mSubsystemManager.registerDisabledLoops(mDisabledLooper);

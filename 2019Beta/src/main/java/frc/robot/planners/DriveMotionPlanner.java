@@ -138,8 +138,7 @@ public class DriveMotionPlanner implements CSVWritable {
             all_constraints.addAll(constraints);
         }
         // Generate the timed trajectory.
-        Trajectory<TimedState<Pose2dWithCurvature>> timed_trajectory = TimingUtil.timeParameterizeTrajectory
-                (reversed, new DistanceView<>(trajectory), kMaxDx, all_constraints, start_vel, end_vel, max_vel, max_accel);
+        Trajectory<TimedState<Pose2dWithCurvature>> timed_trajectory = TimingUtil.timeParameterizeTrajectory(reversed, new DistanceView<>(trajectory), kMaxDx, constraints, start_vel, end_vel, max_vel, max_accel);
         return timed_trajectory;
     }
 
@@ -263,7 +262,7 @@ public class DriveMotionPlanner implements CSVWritable {
     protected Output updateNonlinearFeedback(DifferentialDrive.DriveDynamics dynamics, Pose2d current_state) {
         // Implements eqn. 5.12 from https://www.dis.uniroma1.it/~labrob/pub/papers/Ramsete01.pdf
         final double kBeta = 2;  // >0.
-        final double kZeta = .7;  // Damping coefficient, [0, 1].
+        final double kZeta = .75;  // Damping coefficient, [0, 1].
 
         // Compute gain parameter.
         final double k = 2.0 * kZeta * Math.sqrt(kBeta * dynamics.chassis_velocity.linear * dynamics.chassis_velocity
